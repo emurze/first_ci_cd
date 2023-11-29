@@ -33,7 +33,7 @@ jobs:
 
       - name: Lint with flake8
         run: |
-          flake8 --config setup.cfg
+          flake8 --config setup.cfg src
 
   coverage_of_unit_and_integration_tests:
     needs: flake8-lint
@@ -41,6 +41,8 @@ jobs:
     services:
       db:
         image: postgres:13.0-alpine
+        ports:
+          - "5432:5432"
         env:
           POSTGRES_DB: todo
           POSTGRES_USER: todo
