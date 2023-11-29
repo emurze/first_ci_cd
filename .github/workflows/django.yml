@@ -24,7 +24,7 @@ jobs:
         
     - name: Install Dependencies
       run: |
-        python -m pip3 install poetry
+        pip3 install poetry
         poetry install
         
     - name: Run Project
