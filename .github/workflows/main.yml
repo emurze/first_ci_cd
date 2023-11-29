@@ -35,7 +35,7 @@ jobs:
         run: |
           flake8 --config setup.cfg src
 
-  coverage_of_unit_and_integration_tests:
+  unit_and_integration_tests:
     needs: flake8-lint
     runs-on: ubuntu-latest
     services:
