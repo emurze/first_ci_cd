@@ -43,6 +43,11 @@ jobs:
       run: |
         poetry install
 
+    - name: Create Log File
+      run: |
+        mkdir src/logs
+        touch src/logs/general.log
+
     - name: Run Tests
       run: |
         bash -c "cd src && poetry run python3 manage.py test apps"
