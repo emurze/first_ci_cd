@@ -36,8 +36,8 @@ jobs:
         run: |
           flake8 --config setup.cfg
 
-
   unit_and_integration_tests:
+    needs: flake8-lint
     runs-on: ubuntu-latest
     services:
       db:
