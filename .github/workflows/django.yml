@@ -51,7 +51,7 @@ jobs:
         mkdir src/logs
         touch src/logs/general.log
 
-    - name: Run Tests
+    - name: Run Unittest Tests
       run: |
-        bash -c "cd src && poetry run python3 manage.py test apps"
+        bash -c "cd src && poetry run python3 manage.py test ."
         
