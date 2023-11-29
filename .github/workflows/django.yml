@@ -19,7 +19,16 @@ jobs:
           POSTGRES_DB: todo
           POSTGRES_USER: todo
           POSTGRES_PASSWORD: 12345678
-      
+    env:
+      SECRET_KEY: django-insecure-@l8=fm$s+-mjm-2i0)uoly9j+2pctx@+^k27(g$(bqw%i%jk-$
+      DEBUG: 1
+      LOGGING_LEVEL: DEBUG
+      DB_NAME: todo
+      DB_USER: todo
+      DB_PASSWORD: 12345678
+      DB_HOST: localhost
+      DB_PORT: 5432
+
     steps:
     - uses: actions/checkout@v3
     
@@ -43,15 +52,6 @@ jobs:
         touch src/logs/general.log
 
     - name: Run Tests
-      env:
-        SECRET_KEY: django-insecure-@l8=fm$s+-mjm-2i0)uoly9j+2pctx@+^k27(g$(bqw%i%jk-$
-        DEBUG: 1
-        LOGGING_LEVEL: DEBUG
-        DB_NAME: todo
-        DB_USER: todo
-        DB_PASSWORD: 12345678
-        DB_HOST: localhost
-        DB_PORT: 5432
       run: |
         bash -c "cd src && poetry run python3 manage.py test apps"
         
