@@ -19,7 +19,7 @@ env:
   DB_PORT: 5432
 
 jobs:
-  flake8-lint:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -37,7 +37,7 @@ jobs:
         run: |
           flake8 --config setup.cfg src
 
-  unit_and_integration_tests:
+  unit-integration-tests:
     needs: flake8-lint
     runs-on: ubuntu-latest
     services:
@@ -77,7 +77,7 @@ jobs:
                    poetry run coverage run --rcfile ../setup.cfg --data-file logs/.coverage manage.py test && 
                    poetry run coverage report --rcfile ../setup.cfg --data-file logs/.coverage"
         
-  end_to_end_tests:
+  end-to-end-tests:
     needs: unit_and_integration_tests
     runs-on: ubuntu-latest
     services:
