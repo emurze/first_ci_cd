@@ -74,7 +74,7 @@ jobs:
                    poetry run coverage report --rcfile ../setup.cfg --data-file logs/.coverage"
         
   end_to_end_tests:
-    needs: unit_and_integration_tests
+    needs: coverage_of_unit_and_integration_tests
     runs-on: ubuntu-latest
     services:
       chrome:
