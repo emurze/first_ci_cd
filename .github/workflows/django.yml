@@ -56,6 +56,7 @@ jobs:
         bash -c "cd src && poetry run python3 manage.py test ."
         
   end_to_end_tests:
+    needs: unit_and_integration_tests
     runs-on: ubuntu-latest
     services:
       chrome:
