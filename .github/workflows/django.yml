@@ -6,8 +6,18 @@ on:
   pull_request:
     branches: [ "master" ]
 
+env:
+  SECRET_KEY: django-insecure-@l8=fm$s+-mjm-2i0)uoly9j+2pctx@+^k27(g$(bqw%i%jk-$
+  DEBUG: 1
+  LOGGING_LEVEL: DEBUG
+  DB_NAME: todo
+  DB_USER: todo
+  DB_PASSWORD: 12345678
+  DB_HOST: localhost
+  DB_PORT: 5432
+
 jobs:
-  tests:
+  unit_and_integration_tests:
     runs-on: ubuntu-latest
     services:
       db:
@@ -19,25 +29,20 @@ jobs:
           POSTGRES_DB: todo
           POSTGRES_USER: todo
           POSTGRES_PASSWORD: 12345678
-    env:
-      SECRET_KEY: django-insecure-@l8=fm$s+-mjm-2i0)uoly9j+2pctx@+^k27(g$(bqw%i%jk-$
-      DEBUG: 1
-      LOGGING_LEVEL: DEBUG
-      DB_NAME: todo
-      DB_USER: todo
-      DB_PASSWORD: 12345678
-      DB_HOST: localhost
-      DB_PORT: 5432
-
     steps:
-    - uses: actions/checkout@v3
-    
+    - uses: actions/checkout@v4
+
+    - name: Create Log File
+      run: |
+        mkdir src/logs
+        touch src/logs/general.log
+
     - name: Install Python 3.11
       uses: actions/setup-python@v4
       with:
         python-version: 3.11
 
-    - name: Insall Poetry
+    - name: Install Poetry
       uses: Gr1N/setup-poetry@v8
       with:
         poetry-version: 1.7.1
@@ -46,12 +51,40 @@ jobs:
       run: |
         poetry install
 
+    - name: Run Unit and Integration Tests
+      run: |
+        bash -c "cd src && poetry run python3 manage.py test ."
+        
+  end_to_end_tests:
+    runs-on: ubuntu-latest
+    services:
+      chrome:
+        image: selenium/standalone-chrome:latest
+        ports:
+          - '4444:4444'
+          - '7900:7900'
+    steps:
+    - uses: actions/checkout@v4
+
     - name: Create Log File
       run: |
         mkdir src/logs
         touch src/logs/general.log
 
-    - name: Run Unittest Tests
+    - name: Install Python 3.11
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.11
+
+    - name: Install Poetry
+      uses: Gr1N/setup-poetry@v8
+      with:
+        poetry-version: 1.7.1
+
+    - name: Install Dependencies
       run: |
-        bash -c "cd src && poetry run python3 manage.py test ."
-        
+        poetry install
+
+    - name: Run End-To-End tests
+      run: |
+        bash -c "poetry run python3 src/manage.py test tests"
