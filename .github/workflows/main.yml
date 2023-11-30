@@ -2,7 +2,7 @@ name: Django CI
 
 on:
   push:
-    branches: [ "master", "feature/**" ]
+    branches: [ "master" ]
   pull_request:
     branches: [ "master", "feature/**" ]
 
@@ -126,9 +126,9 @@ jobs:
       with:
         username: ${{ secrets.CLI_DOCKER_USERNAME }}
         password: ${{ secrets.CLI_DOCKER_PASSWORD }}
-
-    - name: Push to Docker Registry
-      uses: docker/build-push-action@v2
-      with:
-        push: true
-        tags: ${{ secrets.CLI_DOCKER_USERNAME }}/${{ env.IMAGE }}:$VERSION
+#
+#    - name: Push to Docker Registry
+#      uses: docker/build-push-action@v2
+#      with:
+#        push: true
+#        tags: ${{ secrets.CLI_DOCKER_USERNAME }}/${{ env.IMAGE }}:$VERSION
