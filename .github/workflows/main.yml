@@ -10,7 +10,7 @@ env:
   DB_NAME: todo
   DB_USER: todo
   DB_PASSWORD: 12345678
-  STAGE_SERVER: localhost
+  STAGING_SERVER: localhost
 
   POSTGRES_DB: todo
   POSTGRES_USER: todo
