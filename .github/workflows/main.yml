@@ -10,6 +10,7 @@ env:
   DB_NAME: todo
   DB_USER: todo
   DB_PASSWORD: 12345678
+  STAGE_SERVER: localhost
 
 jobs:
   lint:
