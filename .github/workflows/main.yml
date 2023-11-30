@@ -2,9 +2,9 @@ name: Django CI
 
 on:
   push:
-    branches: [ "master" ]
-  pull_request:
     branches: [ "master", "feature/**" ]
+#  pull_request:
+#    branches: [ "master", "feature/**" ]
 
 env:
   IMAGE: 'todo'
