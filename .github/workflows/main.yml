@@ -124,4 +124,4 @@ jobs:
         context: .
         file: ./dockerfile
         push: true
-        tags: emurze/$IMAGE:$VERSION
+        tags: emurz/$IMAGE:$VERSION
