@@ -133,4 +133,4 @@ jobs:
 
       - name: Run End-To-End tests
         run: |
-          docker exec -it todo bash -c "poetry run python3 src/manage.py test tests"
+          docker exec todo bash -c "poetry run python3 src/manage.py test tests"
