@@ -44,6 +44,10 @@ jobs:
         image: postgres:13.0-alpine
         ports:
           - "5432:5432"
+        env:
+          POSTGRES_DB: $POSTGRES_DB
+          POSTGRES_USER: $POSTGRES_USER
+          POSTGRES_PASSWORD: $POSTGRES_PASSWORD
     steps:
       - name: Set up Repository
         uses: actions/checkout@v4
@@ -121,7 +125,7 @@ jobs:
           echo "POSTGRES_USER=$POSTGRES_USER" >> env/.db.env
           echo "POSTGRES_PASSWORD=$POSTGRES_PASSWORD" >> env/.db.env
           
-          docker compose -f docker-compose.prod.yml up
+          docker compose -f docker-compose.prod.yml up -d
 
       - name: Run End-To-End tests
         run: |
