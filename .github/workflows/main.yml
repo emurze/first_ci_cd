@@ -58,12 +58,6 @@ jobs:
         with:
           python-version: 3.11
 
-      - name: Cache pip
-        uses: actions/cache@v2.1.6
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('.github/workflows/main.yml') }}
-
       - name: Install Poetry
         uses: Gr1N/setup-poetry@v8
         with:
@@ -106,12 +100,6 @@ jobs:
       with:
         python-version: 3.11
 
-    - name: Cache pip
-      uses: actions/cache@v2.1.6
-      with:
-        path: ~/.cache/pip
-        key: ${{ runner.os }}-pip-${{ hashFiles('.github/workflows/main.yml') }}
-
     - name: Install Poetry
       uses: Gr1N/setup-poetry@v8
       with:
@@ -142,12 +130,6 @@ jobs:
       with:
         username: ${{ secrets.CLI_DOCKER_USERNAME }}
         password: ${{ secrets.CLI_DOCKER_PASSWORD }}
-
-    - name: Push to Docker Hub
-      uses: docker/build-push-action@v2
-      with:
-        push: true
-        tags: ${{ secrets.CLI_DOCKER_USERNAME }}/$IMAGE:$VERSION
 
     - name: Build and push Docker image
       uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
