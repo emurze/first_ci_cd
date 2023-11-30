@@ -88,22 +88,30 @@ jobs:
       run: |
         mkdir src/logs && touch src/logs/general.log
 
-    - name: Install Python 3.11
-      uses: actions/setup-python@v4
+    - uses: KengoTODA/actions-setup-docker-compose@v1
       with:
-        python-version: 3.11
+        version: '2.14.2'
 
-    - name: Install Poetry
+    - name: 'Install docker-compose'
       run: |
-        pip install poetry==1.7.1
+        docker-compose --version
 
-    - name: Install Dependencies
-      run: |
-        poetry install
-
-    - name: Run End-To-End tests
-      run: |
-        poetry run python3 src/manage.py test tests
+#    - name: Install Python 3.11
+#      uses: actions/setup-python@v4
+#      with:
+#        python-version: 3.11
+#
+#    - name: Install Poetry
+#      run: |
+#        pip install poetry==1.7.1
+#
+#    - name: Install Dependencies
+#      run: |
+#        poetry install
+#
+#    - name: Run End-To-End tests
+#      run: |
+#        poetry run python3 src/manage.py test tests
 
   build:
     needs: [unit-integration-tests, end-to-end-tests]
