@@ -2,9 +2,9 @@ name: Django CI
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "master", "feature/**" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "master", "feature/**" ]
 
 env:
   IMAGE: 'todo'
@@ -38,7 +38,7 @@ jobs:
           flake8 --config setup.cfg src
 
   unit-integration-tests:
-    needs: flake8-lint
+    needs: lint
     runs-on: ubuntu-latest
     services:
       db:
