@@ -66,6 +66,15 @@ jobs:
         uses: Gr1N/setup-poetry@v8
         with:
           poetry-version: 1.7.1
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+
+      - name: Load cached venv
+        id: cached-poetry-dependencies
+        uses: actions/cache@v3
+        with:
+          path: .venv
+          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
 
       - name: Install Dependencies
         run: |
@@ -103,6 +112,15 @@ jobs:
       uses: Gr1N/setup-poetry@v8
       with:
         poetry-version: 1.7.1
+        virtualenvs-create: true
+        virtualenvs-in-project: true
+
+    - name: Load cached venv
+      id: cached-poetry-dependencies
+      uses: actions/cache@v3
+      with:
+        path: .venv
+        key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
 
     - name: Install Dependencies
       run: |
