@@ -11,13 +11,12 @@ env:
   DB_NAME: todo
   DB_USER: todo
   DB_PASSWORD: 12345678
-  DB_HOST: localhost
 
 jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - name: 'Setup Repository'
+      - name: 'Set up Repository'
         uses: actions/checkout@v4
 
       - name: Install Python 3.11
@@ -46,7 +45,7 @@ jobs:
           POSTGRES_USER: todo
           POSTGRES_PASSWORD: 12345678
     steps:
-      - name: 'Setup Repository'
+      - name: 'Set up Repository'
         uses: actions/checkout@v4
 
       - name: Create Log File
@@ -82,7 +81,7 @@ jobs:
           - '4444:4444'
           - '7900:7900'
     steps:
-    - name: 'Setup Repository'
+    - name: 'Set up Repository'
       uses: actions/checkout@v4
 
     - name: Create Log File
@@ -110,7 +109,7 @@ jobs:
     needs: [unit-integration-tests, end-to-end-tests]
     runs-on: ubuntu-latest
     steps:
-    - name: 'Setup Repository'
+    - name: 'Set up Repository'
       uses: actions/checkout@v4
 
     - name: Login to Docker Hub
@@ -125,4 +124,4 @@ jobs:
         context: .
         file: ./dockerfile
         push: true
-        tags: $USERNAME/$IMAGE:$VERSION
+        tags: ${{ secrets.CLI_DOCKER_USERNAME }}/$IMAGE:$VERSION
