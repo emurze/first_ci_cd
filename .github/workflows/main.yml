@@ -131,6 +131,19 @@ jobs:
           
           docker compose -f docker-compose.prod.yml up -d
 
+      - name: Install Python 3.11
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+
+      - name: Install Poetry
+        run: |
+          pip install poetry==1.7.1
+
+      - name: Install Dependencies
+        run: |
+          poetry install
+
       - name: Run End-To-End tests
         run: |
-          docker exec todo bash -c "poetry run python3 src/manage.py test tests"
+          poetry run python3 src/manage.py test tests
