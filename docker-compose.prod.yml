@@ -32,7 +32,6 @@ services:
     restart: unless-stopped
     depends_on:
       - db
-      - chrome
 
   web_server:
     image: 'nginx:alpine3.18'
