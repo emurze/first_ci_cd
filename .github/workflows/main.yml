@@ -78,7 +78,7 @@ jobs:
                    poetry run coverage report --rcfile ../setup.cfg --data-file logs/.coverage"
         
   end-to-end-tests:
-    needs: unit_and_integration_tests
+    needs: unit-integration-tests
     runs-on: ubuntu-latest
     services:
       chrome:
@@ -113,7 +113,7 @@ jobs:
         bash -c "poetry run python3 src/manage.py test tests"
 
   build:
-    needs: end_to_end_tests
+    needs: end-to-end-tests
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
