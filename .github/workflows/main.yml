@@ -13,6 +13,7 @@ env:
   DB_PASSWORD: 12345678
   DB_HOST: localhost
   USERNAME: 'emurze'
+  MAIN_SECRET: ${{ secrets.CLI_DOCKER_PASSWORD }}
 
 jobs:
   deploy:
@@ -20,7 +21,7 @@ jobs:
     steps:
       - name: 'hi'
         run: |
-          echo "${{ secrets.CLI_DOCKER_PASSWORD }}"
+          echo "${{ env.MAIN_SECRET }}"
 
 #  lint:
 #    runs-on: ubuntu-latest
