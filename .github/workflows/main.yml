@@ -2,9 +2,9 @@ name: Django CI
 
 on:
   push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+    branches: [ "master", "feature/**" ]
+#  pull_request:
+#    branches: [ "master", "feature/**" ]
 
 env:
   IMAGE: 'todo'
@@ -38,7 +38,7 @@ jobs:
           flake8 --config setup.cfg src
 
   unit-integration-tests:
-    needs: flake8-lint
+    needs: lint
     runs-on: ubuntu-latest
     services:
       db:
@@ -78,7 +78,7 @@ jobs:
                    poetry run coverage report --rcfile ../setup.cfg --data-file logs/.coverage"
         
   end-to-end-tests:
-    needs: unit_and_integration_tests
+    needs: unit-integration-tests
     runs-on: ubuntu-latest
     services:
       chrome:
@@ -113,7 +113,7 @@ jobs:
         bash -c "poetry run python3 src/manage.py test tests"
 
   build:
-    needs: end_to_end_tests
+    needs: end-to-end-tests
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -126,9 +126,9 @@ jobs:
       with:
         username: ${{ secrets.CLI_DOCKER_USERNAME }}
         password: ${{ secrets.CLI_DOCKER_PASSWORD }}
-
-    - name: Push to Docker Registry
-      uses: docker/build-push-action@v2
-      with:
-        push: true
-        tags: ${{ secrets.CLI_DOCKER_USERNAME }}/${{ env.IMAGE }}:$VERSION
+#
+#    - name: Push to Docker Registry
+#      uses: docker/build-push-action@v2
+#      with:
+#        push: true
+#        tags: ${{ secrets.CLI_DOCKER_USERNAME }}/${{ env.IMAGE }}:$VERSION
