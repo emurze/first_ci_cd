@@ -18,7 +18,10 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - echo "${{ secrets.CLI_DOCKER_PASSWORD }}"
+      - name: 'hi'
+        run: |
+          echo "${{ secrets.CLI_DOCKER_PASSWORD }}"
+
 #  lint:
 #    runs-on: ubuntu-latest
 #    steps:
