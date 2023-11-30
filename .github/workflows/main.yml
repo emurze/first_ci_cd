@@ -16,7 +16,7 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - name: 'Set up Repository'
+      - name: Set up Repository
         uses: actions/checkout@v4
 
       - name: Install Python 3.11
@@ -45,7 +45,7 @@ jobs:
           POSTGRES_USER: todo
           POSTGRES_PASSWORD: 12345678
     steps:
-      - name: 'Set up Repository'
+      - name: Set up Repository
         uses: actions/checkout@v4
 
       - name: Create Log File
@@ -71,53 +71,11 @@ jobs:
                    poetry run coverage run --rcfile ../setup.cfg --data-file logs/.coverage manage.py test &&
                    poetry run coverage report --rcfile ../setup.cfg --data-file logs/.coverage"
 
-  end-to-end-tests:
-    needs: lint
-    runs-on: ubuntu-latest
-    services:
-      chrome:
-        image: selenium/standalone-chrome:latest
-        ports:
-          - '4444:4444'
-          - '7900:7900'
-    steps:
-    - name: 'Set up Repository'
-      uses: actions/checkout@v4
-
-    - name: Create Log File
-      run: |
-        mkdir src/logs && touch src/logs/general.log
-
-    - uses: KengoTODA/actions-setup-docker-compose@v1
-      with:
-        version: '2.14.2'
-
-    - name: 'Install docker-compose'
-      run: |
-        docker-compose --version
-
-#    - name: Install Python 3.11
-#      uses: actions/setup-python@v4
-#      with:
-#        python-version: 3.11
-#
-#    - name: Install Poetry
-#      run: |
-#        pip install poetry==1.7.1
-#
-#    - name: Install Dependencies
-#      run: |
-#        poetry install
-#
-#    - name: Run End-To-End tests
-#      run: |
-#        poetry run python3 src/manage.py test tests
-
   build:
-    needs: [unit-integration-tests, end-to-end-tests]
+    needs: unit-integration-tests
     runs-on: ubuntu-latest
     steps:
-    - name: 'Set up Repository'
+    - name: Set up Repository
       uses: actions/checkout@v4
 
     - name: Login to Docker Hub
@@ -133,3 +91,32 @@ jobs:
         file: ./dockerfile
         push: true
         tags: emurze/todo:1
+
+  end-to-end-tests:
+    needs: build
+    runs-on: ubuntu-latest
+    services:
+      chrome:
+        image: selenium/standalone-chrome:latest
+        ports:
+          - '4444:4444'
+          - '7900:7900'
+    steps:
+      - name: Set up Repository
+        uses: actions/checkout@v4
+
+      - name: Create Log File
+        run: |
+          mkdir src/logs && touch src/logs/general.log
+
+      - uses: KengoTODA/actions-setup-docker-compose@v1
+        with:
+          version: '2.14.2'
+
+      - name: Run production server
+        run: |
+          docker compose -f docker-compose.prod.yml up
+
+      - name: Run End-To-End tests
+        run: |
+          docker exec -it todo bash -c "poetry run python3 src/manage.py test tests"
