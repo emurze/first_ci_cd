@@ -129,6 +129,10 @@ jobs:
         username: ${{ secrets.CLI_DOCKER_USERNAME }}
         password: ${{ secrets.CLI_DOCKER_PASSWORD }}
 
+    - name: Check Tag
+      run: |
+        echo "emurze/$IMAGE:$VERSION"
+
     - name: Build and push Docker image
       uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
       with:
