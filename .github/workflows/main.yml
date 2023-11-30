@@ -3,8 +3,8 @@ name: Django CI
 on:
   push:
     branches: [ "master", "feature/**" ]
-#  pull_request:
-#    branches: [ "master", "feature/**" ]
+  pull_request:
+    branches: [ "master", "feature/**" ]
 
 env:
   IMAGE: 'todo'
@@ -67,6 +67,13 @@ jobs:
         with:
           poetry-version: 1.7.1
 
+      - name: Load cached venv
+        id: cached-poetry-dependencies
+        uses: actions/cache@v4
+        with:
+          path: .venv
+          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
+
       - name: Install Dependencies
         run: |
           poetry install
@@ -103,6 +110,13 @@ jobs:
       uses: Gr1N/setup-poetry@v8
       with:
         poetry-version: 1.7.1
+
+    - name: Load cached venv
+      id: cached-poetry-dependencies
+      uses: actions/cache@v4
+      with:
+        path: .venv
+        key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
 
     - name: Install Dependencies
       run: |
