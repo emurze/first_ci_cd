@@ -26,7 +26,7 @@ jobs:
       - name: Install Python 3.11
         uses: actions/setup-python@v4
         with:
-          python-version: "3.11"
+          python-version: 3.11
 
       - name: Install flake8
         run: |
@@ -45,9 +45,9 @@ jobs:
         ports:
           - "5432:5432"
         env:
-          POSTGRES_DB: $POSTGRES_DB
-          POSTGRES_USER: $POSTGRES_USER
-          POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+          POSTGRES_DB: todo
+          POSTGRES_USER: todo
+          POSTGRES_PASSWORD: 12345678
     steps:
       - name: Set up Repository
         uses: actions/checkout@v4
@@ -109,7 +109,7 @@ jobs:
 
       - uses: KengoTODA/actions-setup-docker-compose@v1
         with:
-          version: '2.14.2'
+          version: 2.14.2
 
       - name: Run production server
         run: |
