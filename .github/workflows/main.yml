@@ -125,4 +125,4 @@ jobs:
         context: .
         file: ./dockerfile
         push: true
-        tags: $CLI_DOCKER_USERNAME/$IMAGE:$VERSION
+        tags: emurze/todo:1
