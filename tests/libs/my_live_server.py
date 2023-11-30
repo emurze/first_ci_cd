@@ -5,5 +5,6 @@ from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 
 
 class MyLiveServerTestCase(StaticLiveServerTestCase):
-    host = os.getenv('STAGING_SERVER', sock.gethostbyname(sock.gethostname()))
+    # host = os.getenv('STAGING_SERVER', sock.gethostbyname(sock.gethostname()))
+    host = 'localhost'
     port = 8081
