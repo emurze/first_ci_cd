@@ -12,6 +12,7 @@ ENV POETRY_NO_INTERACTION=1 \
 
 WORKDIR /service/
 
+COPY README.md .
 COPY setup.cfg .
 COPY poetry.lock .
 COPY pyproject.toml .
@@ -21,6 +22,6 @@ RUN poetry install --no-root && rm -rf $POETRY_CACHE_DIR
 COPY src src
 COPY tests tests
 
-RUN poetry install
+RUN poetry install --no-root
 
 EXPOSE 8080

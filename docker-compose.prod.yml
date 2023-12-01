@@ -5,6 +5,8 @@ services:
     container_name: 'db'
     networks:
       - backend
+    ports:
+      - '5432:5432'
     env_file: ./env/.db.env
     volumes:
       - postgres_data:/var/lib/postgresql/data
@@ -25,15 +27,17 @@ services:
   todo:
     build: .
     container_name: 'todo'
-    image: 'todo:1'
+    image: 'emurze/todo:1'
     command: >
       sh -c 'cd src &&
              poetry run python3 manage.py migrate --no-input &&
              poetry run python3 manage.py createadmin &&
              poetry run python3 manage.py collectstatic --noinput &&
-             poetry run gunicorn config.wsgi:application --bind 0.0.0.0:8080 '
+             poetry run gunicorn config.wsgi:application --bind 0.0.0.0:8080'
     networks:
       - backend
+    ports:
+      - '8080:8080'
     volumes:
       - ./src:/service/src
       - ./tests:/service/tests

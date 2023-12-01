@@ -30,11 +30,12 @@ services:
       sh -c 'cd src &&
              poetry run python3 manage.py migrate --no-input &&
              poetry run python3 manage.py createadmin &&
-             poetry run python3 manage.py runserver 0.0.0.0:8080'
+             poetry run python3 manage.py runserver localhost:8080'
     networks:
       - backend
     ports:
       - '8080:8080'
+      - '8088:8088'
     volumes:
       - ./src:/service/src
       - ./tests:/service/tests
