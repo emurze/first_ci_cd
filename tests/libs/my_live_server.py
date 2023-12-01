@@ -5,5 +5,8 @@ from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 
 
 class MyLiveServerTestCase(StaticLiveServerTestCase):
-    host = os.getenv('STAGING_SERVER', sock.gethostbyname(sock.gethostname()))
+    if os.getenv('STAGING_SERVER'):
+        host = '0.0.0.0'
+    else:
+        host = sock.gethostbyname(sock.gethostname())
     port = 8088
