@@ -146,7 +146,7 @@ jobs:
 
       - name: Check
         run: |
-          apt install net-tools 
+          sudo apt-get install net-tools 
           netstat -tulpn | grep LISTEN
 
       - name: Run End-To-End tests
