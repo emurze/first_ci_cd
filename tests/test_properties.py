@@ -1,5 +1,3 @@
-import subprocess
-
 from tests.libs import MyLiveServerTestCase, get_driver
 
 
