@@ -144,13 +144,6 @@ jobs:
         run: |
           poetry install
 
-      - name: Check
-        run: |
-          sudo apt-get install net-tools 
-          netstat -tuplen | grep LISTEN
-          echo "\n\ncurl http:/0.0.0.0:80\n"
-          curl http:/0.0.0.0:80
-
       - name: Run End-To-End tests
         run: |
           poetry run python3 src/manage.py test tests
