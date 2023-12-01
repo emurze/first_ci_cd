@@ -99,12 +99,12 @@ jobs:
   end-to-end-tests:
     needs: build
     runs-on: ubuntu-latest
-    services:
-      chrome:
-        image: selenium/standalone-chrome:latest
-        ports:
-          - '4444:4444'
-          - '7900:7900'
+#    services:
+#      chrome:
+#        image: selenium/standalone-chrome:latest
+#        ports:
+#          - '4444:4444'
+#          - '7900:7900'
     steps:
       - name: Set up Repository
         uses: actions/checkout@v4
