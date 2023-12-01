@@ -122,13 +122,13 @@ jobs:
           echo "LOGGING_LEVEL=$LOGGING_LEVEL" >> env/.todo.env
           echo "DB_NAME=$DB_NAME" >> env/.todo.env
           echo "DB_USER=$DB_USER" >> env/.todo.env
+          echo "DB_HOST=db" >> env/.todo.env
           echo "DB_PASSWORD=$DB_PASSWORD" >> env/.todo.env
           echo "STAGE_SERVER=$STAGE_SERVER" >> env/.todo.env
 
           echo "POSTGRES_DB=$POSTGRES_DB" >> env/.db.env
           echo "POSTGRES_USER=$POSTGRES_USER" >> env/.db.env
           echo "POSTGRES_PASSWORD=$POSTGRES_PASSWORD" >> env/.db.env
-          echo "DB_HOST=db" >> env/.db.env
           
           docker compose -f docker-compose.prod.yml up
 
