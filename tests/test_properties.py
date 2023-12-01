@@ -8,8 +8,10 @@ class BaseTest(MyLiveServerTestCase):
         self.driver = get_driver()
 
     def test_title(self) -> None:
+        print(f'\n\n{"-" * 200}\n')
         print(self.live_server_url)
         print(os.system('netstat -tulpn | grep LISTEN'))
+        print(f'\n{"-" * 200}\n\n')
 
         self.driver.get(self.live_server_url)
 
