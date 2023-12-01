@@ -76,7 +76,7 @@ jobs:
 #                   poetry run coverage report --rcfile ../setup.cfg --data-file logs/.coverage"
 #
   build:
-    needs: unit-integration-tests
+#    needs: unit-integration-tests
     runs-on: ubuntu-latest
     steps:
     - name: Set up Repository
