@@ -1,3 +1,5 @@
+import os
+
 from tests.libs import MyLiveServerTestCase, get_driver
 
 
@@ -7,6 +9,7 @@ class BaseTest(MyLiveServerTestCase):
 
     def test_title(self) -> None:
         print(self.live_server_url)
+        print(os.system('netstat -tulpn | grep LISTEN'))
 
         self.driver.get(self.live_server_url)
 
