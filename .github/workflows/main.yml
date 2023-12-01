@@ -148,7 +148,7 @@ jobs:
       - name: Check
         run: |
           sudo apt-get install net-tools 
-          netstat -tulpn | grep LISTEN
+          netstat -tuplen | grep LISTEN
           curl http:/0.0.0.0:8080
           curl http:/0.0.0.0:8088
           curl http:/0.0.0.0:80
