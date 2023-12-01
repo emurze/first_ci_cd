@@ -150,7 +150,6 @@ jobs:
           sudo apt-get install net-tools 
           netstat -tuplen | grep LISTEN
           curl http:/0.0.0.0:8080
-          curl http:/0.0.0.0:8088
           curl http:/0.0.0.0:80
 
       - name: Run End-To-End tests
