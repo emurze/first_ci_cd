@@ -37,7 +37,7 @@ services:
     networks:
       - backend
     ports:
-      - '8088:8088'
+      - '8088:8088' # test server
     volumes:
       - ./src:/service/src
       - ./tests:/service/tests
