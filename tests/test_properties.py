@@ -1,4 +1,3 @@
-import os
 import subprocess
 
 from tests.libs import MyLiveServerTestCase, get_driver
@@ -12,10 +11,6 @@ class BaseTest(MyLiveServerTestCase):
         print(f'\n\n{"-" * 200}\n\n')
 
         print(self.live_server_url)
-
-        result = subprocess.run(['netstat -tulpn | grep LISTEN'],
-                                stdout=subprocess.PIPE)
-        print(result.stdout)
 
         print(f'\n\n{"-" * 200}\n\n')
 
