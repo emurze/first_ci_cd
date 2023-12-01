@@ -17,6 +17,9 @@ services:
     container_name: 'chrome'
     networks:
       - backend
+    ports:
+      - '4444:4444'
+      - '7900:7900'
     privileged: true
     shm_size: 2g
     restart: unless-stopped
