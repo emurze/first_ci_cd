@@ -33,7 +33,7 @@ services:
              poetry run python3 manage.py migrate --no-input &&
              poetry run python3 manage.py createadmin &&
              poetry run python3 manage.py collectstatic --noinput &&
-             poetry run gunicorn config.wsgi:application --bind 0.0.0.0:8080 '
+             poetry run gunicorn config.wsgi:application --bind localhost:8080 '
     networks:
       - backend
     ports:
