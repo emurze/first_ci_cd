@@ -6,12 +6,10 @@ class BaseTest(MyLiveServerTestCase):
         self.driver = get_driver()
 
     def test_title(self) -> None:
-        print(f'\n\n{"-" * 200}\n\n')
-
         print(self.live_server_url)
 
-        print(f'\n\n{"-" * 200}\n\n')
+        print()
 
-        self.driver.get(self.live_server_url)
+        self.driver.get('http://0.0.0.0:8088')
 
         self.assertIn('Django', self.driver.title)
