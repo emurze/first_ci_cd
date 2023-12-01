@@ -4,6 +4,7 @@ on: [push]
 
 env:
   CLI_DOCKER_USERNAME: emurze
+  STAGING_SERVER: localhost
   SECRET_KEY: django-insecure-@l8=fm$s+-mjm-2i0)uoly9j+2pctx@+^k27(g$(bqw%i%jk-$
   DEBUG: 1
   LOGGING_LEVEL: DEBUG
