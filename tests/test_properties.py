@@ -8,6 +8,6 @@ class BaseTest(MyLiveServerTestCase):
     def test_title(self) -> None:
         self.driver.get('https://github.com')
 
-        self.driver.get('http://0.0.0.0:80')
+        self.driver.get(self.live_server_url)
 
         self.assertIn('Django', self.driver.title)
