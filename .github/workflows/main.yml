@@ -10,73 +10,72 @@ env:
   DB_NAME: todo
   DB_USER: todo
   DB_PASSWORD: 12345678
-  STAGING_SERVER: localhost
 
   POSTGRES_DB: todo
   POSTGRES_USER: todo
   POSTGRES_PASSWORD: 12345678
 
 jobs:
-#  lint:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Set up Repository
-#        uses: actions/checkout@v4
-#
-#      - name: Install Python 3.11
-#        uses: actions/setup-python@v4
-#        with:
-#          python-version: 3.11
-#
-#      - name: Install flake8
-#        run: |
-#          pip install flake8
-#
-#      - name: Lint with flake8
-#        run: |
-#          flake8 --config setup.cfg src
-#
-#  unit-integration-tests:
-#    needs: lint
-#    runs-on: ubuntu-latest
-#    services:
-#      db:
-#        image: postgres:13.0-alpine
-#        ports:
-#          - "5432:5432"
-#        env:
-#          POSTGRES_DB: todo
-#          POSTGRES_USER: todo
-#          POSTGRES_PASSWORD: 12345678
-#    steps:
-#      - name: Set up Repository
-#        uses: actions/checkout@v4
-#
-#      - name: Create Log File
-#        run: |
-#          mkdir src/logs && touch src/logs/general.log
-#
-#      - name: Install Python 3.11
-#        uses: actions/setup-python@v4
-#        with:
-#          python-version: 3.11
-#
-#      - name: Install Poetry
-#        run: |
-#          pip install poetry==1.7.1
-#
-#      - name: Install Dependencies
-#        run: |
-#          poetry install
-#
-#      - name: Run Unit and Integration Tests
-#        run: |
-#          bash -c "cd src &&
-#                   poetry run coverage run --rcfile ../setup.cfg --data-file logs/.coverage manage.py test &&
-#                   poetry run coverage report --rcfile ../setup.cfg --data-file logs/.coverage"
-#
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Repository
+        uses: actions/checkout@v4
+
+      - name: Install Python 3.11
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+
+      - name: Install flake8
+        run: |
+          pip install flake8
+
+      - name: Lint with flake8
+        run: |
+          flake8 --config setup.cfg src
+
+  unit-integration-tests:
+    needs: lint
+    runs-on: ubuntu-latest
+    services:
+      db:
+        image: postgres:13.0-alpine
+        ports:
+          - "5432:5432"
+        env:
+          POSTGRES_DB: todo
+          POSTGRES_USER: todo
+          POSTGRES_PASSWORD: 12345678
+    steps:
+      - name: Set up Repository
+        uses: actions/checkout@v4
+
+      - name: Create Log File
+        run: |
+          mkdir src/logs && touch src/logs/general.log
+
+      - name: Install Python 3.11
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+
+      - name: Install Poetry
+        run: |
+          pip install poetry==1.7.1
+
+      - name: Install Dependencies
+        run: |
+          poetry install
+
+      - name: Run Unit and Integration Tests
+        run: |
+          bash -c "cd src &&
+                   poetry run coverage run --rcfile ../setup.cfg --data-file logs/.coverage manage.py test &&
+                   poetry run coverage report --rcfile ../setup.cfg --data-file logs/.coverage"
+
   build:
-#    needs: unit-integration-tests
+    needs: unit-integration-tests
     runs-on: ubuntu-latest
     steps:
     - name: Set up Repository
@@ -99,12 +98,6 @@ jobs:
   end-to-end-tests:
     needs: build
     runs-on: ubuntu-latest
-#    services:
-#      chrome:
-#        image: selenium/standalone-chrome:latest
-#        ports:
-#          - '4444:4444'
-#          - '7900:7900'
     steps:
       - name: Set up Repository
         uses: actions/checkout@v4
