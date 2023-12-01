@@ -149,12 +149,8 @@ jobs:
         run: |
           sudo apt-get install net-tools 
           netstat -tuplen | grep LISTEN
-          echo "\n\ncurl http:/0.0.0.0:8080\n"
-          curl http:/0.0.0.0:8080
           echo "\n\ncurl http:/0.0.0.0:80\n"
           curl http:/0.0.0.0:80
-          echo "\n\ncurl http:/localhost:8088\n"
-          curl http:/localhost:8088
 
       - name: Run End-To-End tests
         run: |
