@@ -144,6 +144,11 @@ jobs:
         run: |
           poetry install
 
+      - name: Check
+        run: |
+          apt install net-tools 
+          netstat -tulpn | grep LISTEN
+
       - name: Run End-To-End tests
         run: |
           poetry run python3 src/manage.py test tests
