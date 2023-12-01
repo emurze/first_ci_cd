@@ -8,7 +8,13 @@ class BaseTest(MyLiveServerTestCase):
     def test_title(self) -> None:
         print(self.live_server_url)
 
-        print()
+        self.driver.get('http://0.0.0.0:80')
+
+        print(self.driver.title)
+
+        self.driver.get('http://0.0.0.0:8080')
+
+        print(self.driver.title)
 
         self.driver.get('http://0.0.0.0:8088')
 
