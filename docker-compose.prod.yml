@@ -27,7 +27,7 @@ services:
   todo:
     build: .
     container_name: 'todo'
-    image: 'todo:1'
+    image: 'emurze/todo:1'
     command: >
       sh -c 'cd src &&
              poetry run python3 manage.py migrate --no-input &&

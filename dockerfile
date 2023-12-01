@@ -22,6 +22,6 @@ RUN poetry install --no-root && rm -rf $POETRY_CACHE_DIR
 COPY src src
 COPY tests tests
 
-RUN poetry install
+RUN poetry install --no-root
 
 EXPOSE 8080
