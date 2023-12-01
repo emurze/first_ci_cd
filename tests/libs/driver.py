@@ -12,14 +12,14 @@ class BaseDriverFactory(abc.ABC):
 
 
 class ChromeDriverFactory(BaseDriverFactory):
-    host = os.getenv('STAGING_SERVER', "http://chrome")
+    host = os.getenv('STAGING_SERVER', "chrome")
     port = "4444"
 
     @classmethod
     def get_webdriver(cls):
         options = webdriver.ChromeOptions()
         return webdriver.Remote(
-            f"{cls.host}:{cls.port}",
+            f"http://{cls.host}:{cls.port}",
             options=options,
         )
 
