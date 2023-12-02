@@ -12,7 +12,7 @@ class BaseDriverFactory(abc.ABC):
 
 
 class ChromeDriverFactory(BaseDriverFactory):
-    host = os.getenv('STAGING_SERVER', "chrome")
+    host = "chrome"
     port = "4444"
 
     @classmethod
