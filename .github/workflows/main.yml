@@ -64,6 +64,15 @@ jobs:
       - name: Install Poetry
         run: |
           pip install poetry==1.7.1
+          poetry config virtualenvs.create true
+          poetry config virtualenvs.in-project true
+
+      - name: Load cached venv
+        id: cached-poetry-dependencies
+        uses: actions/cache@v3
+        with:
+          path: .venv
+          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
 
       - name: Install Dependencies
         run: |
@@ -124,7 +133,7 @@ jobs:
           echo "DB_USER=$DB_USER" >> env/.todo.env
           echo "DB_HOST=db" >> env/.todo.env
           echo "DB_PASSWORD=$DB_PASSWORD" >> env/.todo.env
-          echo "STAGE_SERVER=$STAGE_SERVER" >> env/.todo.env
+          echo "STAGING_SERVER=$STAGING_SERVER" >> env/.todo.env
 
           echo "POSTGRES_DB=$POSTGRES_DB" >> env/.db.env
           echo "POSTGRES_USER=$POSTGRES_USER" >> env/.db.env
@@ -140,6 +149,15 @@ jobs:
       - name: Install Poetry
         run: |
           pip install poetry==1.7.1
+          poetry config virtualenvs.create true
+          poetry config virtualenvs.in-project true
+
+      - name: Load cached venv
+        id: cached-poetry-dependencies
+        uses: actions/cache@v3
+        with:
+          path: .venv
+          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
 
       - name: Install Dependencies
         run: |
