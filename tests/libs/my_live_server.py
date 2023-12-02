@@ -1,8 +1,8 @@
-import socket as sock
+import socket
 
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 
 
 class MyLiveServerTestCase(StaticLiveServerTestCase):
-    host = sock.gethostbyname(sock.gethostname())
+    host = socket.gethostbyname(socket.gethostname())
     port = 8088
